@@ -1,0 +1,10 @@
+{
+    "C_Cpp.errorSquiggles": "disabled",
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/hagit/Desktop/Ass_c_3",
+            "binaryPath": "/home/hagit/Desktop/Ass_c_3/StrList",
+            "binaryArgs": []
+        }
+    ]
+}
