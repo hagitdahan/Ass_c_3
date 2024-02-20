@@ -104,6 +104,7 @@ void StrList_print(const StrList* StrList){
             printf("%s ",p->_data);
             p=p->_next;
         }
+        printf("\n");
     }
 }
 void StrList_printAt(const StrList* Strlist,int index){
@@ -114,7 +115,7 @@ void StrList_printAt(const StrList* Strlist,int index){
             p=p->_next;
             i++;
         }
-        printf("%s",p->_data);
+        printf("%s\n",p->_data);
     }
 }
 int StrList_printLen(const StrList* Strlist){

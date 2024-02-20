@@ -33,7 +33,7 @@ int main(){
             }
         else if(number==4){
             int len=StrList_size(strlist);
-            printf("%d",len);
+            printf("%d\n",len);
         }
         else if(number==5){
             int index;
@@ -43,12 +43,12 @@ int main(){
         else if(number==6){
             int count_chars=0;
             count_chars=StrList_printLen(strlist);
-            printf("%d",count_chars);
+            printf("%d\n",count_chars);
         }
         else if(number==7){
             scanf("%s",currentStr);
             int n=StrList_count(strlist,currentStr);
-            printf("%d",n);
+            printf("%d\n",n);
         }
         else if(number==8){
             scanf("%s",currentStr);
