@@ -195,16 +195,19 @@ void StrList_removeAt(StrList* StrList, int index){
     }
 }
 void StrList_remove_all(StrList * strlist){
-    if(strlist->_head!=NULL){
+    if(strlist->_head->_next!=NULL){
         Node * current_node=strlist->_head;
-        Node * next=strlist->_head;
+        Node * next;
         while(current_node!=NULL){
             next=current_node->_next;
             free((void *)current_node->_data);
             free(current_node);
             current_node=next;
         }
-        free(strlist);
+        strlist->_head=NULL;
+        strlist ->_size=0;
+
+        
     }
 }
 int StrList_isEqual(const StrList* StrList1, const StrList* StrList2){
@@ -267,9 +270,10 @@ void StrList_sort( StrList* StrList){
             Node* prev = StrList ->_head;
             for(int i=0 ; i<size-j-1 && p->_next!=NULL;i++){
                 //swap pointers
-                if(strcasecmp(p->_data,p->_next->_data)>0){
+                if(strcmp(p->_data,p->_next->_data)>0){
                     if(i==0){
                         StrList ->_head = temp1;
+                        prev=StrList->_head;
                         p ->_next = temp1 ->_next;
                         StrList -> _head ->_next = p;
                     }
@@ -281,7 +285,10 @@ void StrList_sort( StrList* StrList){
                         prev = prev ->_next;
                     }
                 }
-                p=p->_next;
+                else{
+                    prev=p;
+                    p=p->_next;
+                }
             }
         }
     }
@@ -292,7 +299,7 @@ int StrList_isSorted(StrList* StrList){
         Node * p=StrList->_head;
         while(p->_next!=NULL){
             
-            if(strcasecmp(p->_data,p->_next->_data)>0)
+            if(strcmp(p->_data,p->_next->_data)>0)
             {
                 return 0;
             }

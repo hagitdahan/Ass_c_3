@@ -23,10 +23,10 @@ int main(){
                 }
         }
         else if(number==2){
-                int index;
-                scanf("%d",&index);
-                scanf("%s",&currentStr);
-                StrList_insertAt(strlist,currentStr,index);
+            int index;
+            scanf("%d",&index);
+            scanf("%s",currentStr);
+            StrList_insertAt(strlist,currentStr,index);
         }
         else if (number==3){
                 StrList_print(strlist);
