@@ -104,8 +104,8 @@ void StrList_print(const StrList* StrList){
             printf("%s ",p->_data);
             p=p->_next;
         }
-        printf("\n");
     }
+    printf("\n");
 }
 void StrList_printAt(const StrList* Strlist,int index){
     if(index>=0 && index<Strlist->_size){
