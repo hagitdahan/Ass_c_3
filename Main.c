@@ -77,6 +77,6 @@ int main(){
         scanf("%d",&number);
     }
     
-
+    StrList_free(strlist);
     return 0;
 }

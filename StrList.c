@@ -45,15 +45,7 @@ StrList * StrList_alloc(){
 void StrList_free(StrList* StrList){
     //free to strlist,if the list not alloc return.
     //otherwise we are doing free to all nodes, also there data, after free to the list
-    if(StrList==NULL) return;
-    Node * p1=StrList->_head;
-    Node * p2;
-    while(p1){
-        p2=p1;
-        p1=p1->_next;
-        free((void *)p2->_data);
-        free(p2);
-    }
+    StrList_remove_all(StrList);
     free(StrList);
 }
 size_t StrList_size(const StrList* StrList){
@@ -78,7 +70,7 @@ void StrList_insertLast(StrList* StrList,const char* data){
         }
     }
 }
-//check if i can insert in the end
+
 void StrList_insertAt(StrList* StrList,const char* data,int index){
     if(index>=0 && index<=StrList->_size){
         if(StrList->_head!=NULL){
@@ -93,27 +85,33 @@ void StrList_insertAt(StrList* StrList,const char* data,int index){
             if(new_node!=NULL){
                 //insert in head
                 if(index==0){
-                    new_node->_next=p->_next;
+                    new_node->_next=StrList->_head;
                     StrList->_head=new_node;
                 }
+                //regular case
                 else{
                     p->_next=new_node;
                 }
                 StrList->_size++;
             }
         }
+        //if the list is empty
         else{
             StrList_insertLast(StrList,data);
         }
     }
 }
+
 char* StrList_firstData(const StrList* StrList){
+    //if the head not null return the first string of the head node
+    //else return null.
     if(StrList->_head!=NULL){
         return StrList->_head->_data;
     }
     else return NULL;
 }
 void StrList_print(const StrList* StrList){
+    //print all the strings in Strlist
     if(StrList->_head!=NULL){
         Node * p= StrList->_head;
         for(int i=0;i<StrList->_size;i++){
@@ -189,7 +187,7 @@ void StrList_remove(StrList* StrList, const char* data) {
         }
     }
 }
-//i can remove the last one?
+
 void StrList_removeAt(StrList* StrList, int index){
     if(index>=0&&index<=StrList->_size){
         if(StrList->_head!=NULL){
