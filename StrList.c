@@ -42,7 +42,13 @@ StrList * StrList_alloc(){
 	return p;
 }
 void StrList_remove_all(StrList * strlist){
-    if(strlist->_head->_next!=NULL){
+    if(strlist->_size==1){
+        free((void *)strlist->_head->_data);
+        strlist->_head=NULL;
+        strlist->_size=0;
+    }
+    else if(strlist->_head!=NULL && strlist->_head->_next!=NULL)
+    {
         Node * current_node=strlist->_head;
         Node * next;
         while(current_node!=NULL){
@@ -52,9 +58,7 @@ void StrList_remove_all(StrList * strlist){
             current_node=next;
         }
         strlist->_head=NULL;
-        strlist ->_size=0;
-
-        
+        strlist ->_size=0;   
     }
 }
 void StrList_free(StrList* StrList){
