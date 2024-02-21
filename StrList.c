@@ -14,7 +14,9 @@ typedef struct _StrList StrList;
 
 Node * Node_alloc(const char * data, Node * next) {
 	Node* p= (Node*)malloc(sizeof(Node));
+    //checking if malloc didnt work well
     if(p==NULL) return NULL;
+    //otherwise create memory for new data also checking if malloc work well else free p 
     else{
         p->_data=(char *)malloc(strlen(data)+1);
         if(p->_data!=NULL){
@@ -30,6 +32,8 @@ Node * Node_alloc(const char * data, Node * next) {
 }
 
 StrList * StrList_alloc(){
+    //create new strlist with create memory and initialize size 
+    //and head and return pointer to the new list.
 	StrList * p= (StrList*)malloc(sizeof(StrList));
     if(p!=NULL){
 	    p->_head= NULL;
@@ -39,6 +43,8 @@ StrList * StrList_alloc(){
 }
 
 void StrList_free(StrList* StrList){
+    //free to strlist,if the list not alloc return.
+    //otherwise we are doing free to all nodes, also there data, after free to the list
     if(StrList==NULL) return;
     Node * p1=StrList->_head;
     Node * p2;
@@ -51,6 +57,7 @@ void StrList_free(StrList* StrList){
     free(StrList);
 }
 size_t StrList_size(const StrList* StrList){
+    //return the size of the list
     return StrList->_size;
 }
 /*if the list is empty ask for memory and insert the head,else insert in the end of the list.*/
@@ -91,8 +98,8 @@ void StrList_insertAt(StrList* StrList,const char* data,int index){
                 }
                 else{
                     p->_next=new_node;
-                    StrList->_size++;
                 }
+                StrList->_size++;
             }
         }
         else{
