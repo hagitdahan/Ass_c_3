@@ -73,8 +73,10 @@ void StrList_insertLast(StrList* StrList,const char* data){
 }
 //check if i can insert in the end
 void StrList_insertAt(StrList* StrList,const char* data,int index){
-    if(index>=0 && index<StrList->_size){
+    if(index>=0 && index<=StrList->_size){
         if(StrList->_head!=NULL){
+            //private case insert last
+            if(index==StrList->_size) StrList_insertLast(StrList,data);
             Node * p=StrList->_head;
             while(index-1>0){
                 p=p->_next;
@@ -82,8 +84,15 @@ void StrList_insertAt(StrList* StrList,const char* data,int index){
             }
             Node * new_node=Node_alloc(data,p->_next);
             if(new_node!=NULL){
-                p->_next=new_node;
-                StrList->_size++;
+                //insert in head
+                if(index==0){
+                    new_node->_next=p->_next;
+                    StrList->_head=new_node;
+                }
+                else{
+                    p->_next=new_node;
+                    StrList->_size++;
+                }
             }
         }
         else{
@@ -175,7 +184,7 @@ void StrList_remove(StrList* StrList, const char* data) {
 }
 //i can remove the last one?
 void StrList_removeAt(StrList* StrList, int index){
-    if(index>=0&&index<StrList->_size){
+    if(index>=0&&index<=StrList->_size){
         if(StrList->_head!=NULL){
             Node * p=StrList->_head;
             Node * to_remove=StrList->_head;
@@ -184,8 +193,14 @@ void StrList_removeAt(StrList* StrList, int index){
                 p=p->_next;
                 i++;
             }
-            to_remove=p->_next;
-            p->_next=to_remove->_next;
+            //private case remove head
+            if(index==0){
+                StrList->_head=to_remove->_next;
+            }
+            else {
+                to_remove=p->_next;
+                p->_next=to_remove->_next;
+            }
             StrList->_size--;
             free((void *)to_remove->_data);
             free(to_remove);
