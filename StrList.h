@@ -27,6 +27,10 @@ Node * Node_alloc(const char * data, Node * next);
  */
 StrList* StrList_alloc();
 
+/*remove all the list
+*/
+
+void StrList_remove_all(StrList * strlist);
 /*
  * Frees the memory and resources allocated to StrList.
  * If StrList==NULL does nothing (same as free).
@@ -84,11 +88,6 @@ void StrList_remove(StrList* StrList, const char* data);
 	Given an index and a list, remove the string at that index.
 */
 void StrList_removeAt(StrList* StrList, int index);
-/*
-remove all the list
-*/
-
-void StrList_remove_all(StrList * strlist);
 
 /*
  * Checks if two StrLists have the same elements

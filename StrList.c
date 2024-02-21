@@ -20,7 +20,7 @@ Node * Node_alloc(const char * data, Node * next) {
     else{
         p->_data=(char *)malloc(strlen(data)+1);
         if(p->_data!=NULL){
-            strcpy(p->_data,data);
+            strcpy((char*)p->_data,data);
             p->_next= next;
         } 
         else{
@@ -41,7 +41,22 @@ StrList * StrList_alloc(){
     }
 	return p;
 }
+void StrList_remove_all(StrList * strlist){
+    if(strlist->_head->_next!=NULL){
+        Node * current_node=strlist->_head;
+        Node * next;
+        while(current_node!=NULL){
+            next=current_node->_next;
+            free((void *)current_node->_data);
+            free(current_node);
+            current_node=next;
+        }
+        strlist->_head=NULL;
+        strlist ->_size=0;
 
+        
+    }
+}
 void StrList_free(StrList* StrList){
     //free to strlist,if the list not alloc return.
     //otherwise we are doing free to all nodes, also there data, after free to the list
@@ -106,7 +121,7 @@ char* StrList_firstData(const StrList* StrList){
     //if the head not null return the first string of the head node
     //else return null.
     if(StrList->_head!=NULL){
-        return StrList->_head->_data;
+        return (char*)StrList->_head->_data;
     }
     else return NULL;
 }
@@ -214,22 +229,7 @@ void StrList_removeAt(StrList* StrList, int index){
         
     }
 }
-void StrList_remove_all(StrList * strlist){
-    if(strlist->_head->_next!=NULL){
-        Node * current_node=strlist->_head;
-        Node * next;
-        while(current_node!=NULL){
-            next=current_node->_next;
-            free((void *)current_node->_data);
-            free(current_node);
-            current_node=next;
-        }
-        strlist->_head=NULL;
-        strlist ->_size=0;
 
-        
-    }
-}
 int StrList_isEqual(const StrList* StrList1, const StrList* StrList2){
     if(StrList1->_size!=StrList2->_size){
         return 0;
