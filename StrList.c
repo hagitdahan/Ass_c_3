@@ -130,7 +130,8 @@ void StrList_print(const StrList* StrList){
     if(StrList->_head!=NULL){
         Node * p= StrList->_head;
         for(int i=0;i<StrList->_size;i++){
-            printf("%s ",p->_data);
+            printf("%s",p->_data);
+            if(i<StrList->_size-1) printf(" ");
             p=p->_next;
         }
     }
